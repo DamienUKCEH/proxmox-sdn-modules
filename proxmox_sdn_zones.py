@@ -220,7 +220,7 @@ class ProxmoxSdnZones(ProxmoxAnsible):
 
         try:
             self.proxmox_api.cluster.sdn.zones.post(**zone_infos)
-            self.proxmox_api.cluster.sdn.put()
+#            self.proxmox_api.cluster.sdn.put()
         except Exception as e:
             self.module.fail_json(msg="Failed to create zone with ID {0}: {1}".format(zone_id, e))
 
@@ -239,7 +239,7 @@ class ProxmoxSdnZones(ProxmoxAnsible):
 
             try:
                 self.proxmox_api.cluster.sdn.zones(zone_id).delete()
-                self.proxmox_api.cluster.sdn.put()
+#                self.proxmox_api.cluster.sdn.put()
             except Exception as e:
                 self.module.fail_json(msg="Failed to delete zone with ID {0}: {1}".format(zone_id, e))
         else:
@@ -254,7 +254,7 @@ def main():
         # Mandatory
         'zone': {'type': 'str', 'required': True},
         'type': {'type': 'str', 'choices': ['evpn', 'faucet', 'qinq', 'simple', 'vlan', 'vxlan'],'required': True},
-        # Optionnal
+        # Optional
         'advertise-subnets': {'type': 'bool', 'required': False},
         'bridge': {'type': 'str', 'required': False},
         'bridge-disable-mac-learning': {'type': 'bool', 'required': False},
